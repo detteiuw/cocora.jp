@@ -32,7 +32,7 @@ html, body{
   padding-top: 6px;
 }
 
-/* ロゴの“デカすぎ”をここで抑える */
+/* ロゴ：ウィンドウ幅に追従しつつ、常に見栄えする上限・下限を持たせる */
 .hero-logo{
   display:flex;
   align-items:center;
@@ -40,9 +40,14 @@ html, body{
 }
 
 .hero-logo img{
-  width: min(520px, 92vw);  /* PCでも上限、モバイルでも画面幅で収まる */
-  height: auto;
   display:block;
+  height: auto;
+
+  /* これが肝：ウィンドウに応じて可変（clampで最小〜理想〜最大） */
+  width: clamp(220px, 52vw, 520px);
+
+  /* 念のためはみ出し防止 */
+  max-width: 100%;
 }
 
 /* 既存のtitleは残しても良いが、ロゴ運用なら非表示でもOK */
@@ -140,10 +145,10 @@ li{
   display: block;
 }
 
-/* QR表示（figureクラスを統一） */
+/* QR：でかすぎ対策。幅を固定寄りにしつつレスポンシブ */
 .line-qr{
   margin: 0;
-  width: min(260px, 92vw);
+  width: clamp(140px, 18vw, 200px);
 }
 
 .line-qr img{
@@ -160,22 +165,6 @@ li{
   font-size: 0.9rem;
 }
 
-.footer{
-  margin-top: 56px;
-  padding-top: 18px;
-  border-top: 1px solid var(--line);
-}
-
-.small{
-  color: var(--muted);
-  font-size: 0.9rem;
-  margin: 0;
-}
-
-a{
-  color: var(--link);
-}
-
 /* モバイル最適化 */
 @media (max-width: 520px){
   .page{
@@ -187,8 +176,14 @@ a{
     margin-top: 36px;
   }
 
+  /* モバイルのロゴ：横幅を抑える */
   .hero-logo img{
-    width: 92vw;
+    width: clamp(200px, 78vw, 360px);
+  }
+
+  /* モバイルのQR：さらに小さく */
+  .line-qr{
+    width: 160px;
   }
 
   .cta{
