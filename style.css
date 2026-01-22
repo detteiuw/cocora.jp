@@ -27,6 +27,25 @@ html, body{
   padding: 0 24px;
 }
 
+/* HERO */
+.hero{
+  padding-top: 6px;
+}
+
+/* ロゴの“デカすぎ”をここで抑える */
+.hero-logo{
+  display:flex;
+  align-items:center;
+  justify-content:flex-start;
+}
+
+.hero-logo img{
+  width: min(520px, 92vw);  /* PCでも上限、モバイルでも画面幅で収まる */
+  height: auto;
+  display:block;
+}
+
+/* 既存のtitleは残しても良いが、ロゴ運用なら非表示でもOK */
 .title{
   font-size: 2.0rem;
   font-weight: 750;
@@ -101,6 +120,7 @@ li{
   padding: 6px 0;
 }
 
+/* CTA（LINEボタン + QR） */
 .cta{
   margin-top: 18px;
   display: flex;
@@ -109,25 +129,32 @@ li{
   flex-wrap: wrap;
 }
 
+.line-btn{
+  display:inline-flex;
+  align-items:center;
+}
+
 .line-btn img{
   height: 44px;
   width: auto;
   display: block;
 }
 
-.figure{
+/* QR表示（figureクラスを統一） */
+.line-qr{
   margin: 0;
+  width: min(260px, 92vw);
 }
 
-.figure img{
-  max-width: 260px;
+.line-qr img{
   width: 100%;
+  height: auto;
   border: 1px solid var(--line);
   border-radius: 12px;
   display: block;
 }
 
-.figure figcaption{
+.line-qr figcaption{
   margin-top: 8px;
   color: var(--muted);
   font-size: 0.9rem;
@@ -147,4 +174,28 @@ li{
 
 a{
   color: var(--link);
+}
+
+/* モバイル最適化 */
+@media (max-width: 520px){
+  .page{
+    margin: 42px auto;
+    padding: 0 18px;
+  }
+
+  .section{
+    margin-top: 36px;
+  }
+
+  .hero-logo img{
+    width: 92vw;
+  }
+
+  .cta{
+    gap: 14px;
+  }
+
+  .line-btn img{
+    height: 42px;
+  }
 }
